@@ -12,7 +12,7 @@ async function postUser(user) {
     });
   } catch (error) {
     if (error.name === "MongoServerError" && error.code === 11000) {
-      throw new AppError(422, "Username already exist");
+      throw new AppError(409, "Username or email already exists");
     }
     throw Error(error);
   }

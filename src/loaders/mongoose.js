@@ -7,6 +7,7 @@ async function load() {
   )}:${config.get("db.port")}/${config.get("db.database")}`;
   try {
     await mongoose.connect(uri);
+    console.log("Database connected");
   } catch (error) {
     throw Error(error);
   }

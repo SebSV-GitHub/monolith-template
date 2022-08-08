@@ -5,21 +5,25 @@ import { getToken } from "../utils/auth";
 import { verify } from "../utils/jwt";
 
 async function validateAuth(req, _res, next) {
-  const { prefix, token } = getToken(req);
-  if (!prefix || prefix !== "Bearer") {
-    return next(new AppError(403, "Invalid token prefix"));
+  try {
+    const { prefix, token } = getToken(req);
+    if (!prefix || prefix !== "Bearer") {
+      return next(new AppError(401, "Invalid token prefix"));
+    }
+    const user = verify(token);
+
+    const instance = await findToken(token);
+
+    if (!instance || instance.status === TokenStatus.INACTIVE) {
+      return next(new AppError(401, "Invalid token"));
+    }
+
+    req.user = user;
+
+    next();
+  } catch (error) {
+    return next(error);
   }
-  const user = verify(token);
-
-  const instance = await findToken(token);
-
-  if (!instance || instance.status === TokenStatus.INACTIVE) {
-    return next(new AppError(403, "Invalid token"));
-  }
-
-  req.user = user;
-
-  next();
 }
 
 export default validateAuth;
