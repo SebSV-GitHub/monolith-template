@@ -32,7 +32,7 @@ npm run dev
 Just run:
 
 ```sh
-docker compose up
+docker compose up --build
 ```
 
 > 🗑 If you experience problems try to delete previous images. `docker system prune -a`
