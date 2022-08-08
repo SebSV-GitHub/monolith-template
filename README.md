@@ -4,9 +4,8 @@ Backend Engineer test
 
 ## 📞 Requests
 
-Inside the code there's a file called `Insomnia_2022-07-31.json`.
-
-Import it in [Insomnia](https://insomnia.rest). It's a REST client like Postman... but better 😆.
+Inside the project there is a file called `API.json`.
+It contains the OpenAPI definition.
 
 ## 🚀 Running the code
 
