@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/SebSV-GitHub/monolith-template#readme",
   "dependencies": {
-    "@sebsv-github/logger": "^0.4.5",
+    "@sebsv-github/logger": "^0.4.6",
     "argon2": "^0.28.7",
     "config": "^3.3.7",
     "cors": "^2.8.5",
