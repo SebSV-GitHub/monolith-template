@@ -6,7 +6,7 @@ import errorHandler from "./middlewares/errorHandler";
 import requestLogging, { createLogger } from "@sebsv-github/logger";
 
 const app = new express();
-const logger = createLogger("App");
+const logger = createLogger({ label: "App" });
 
 app.use(json());
 app.use(cors());
