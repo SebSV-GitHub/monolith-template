@@ -3,11 +3,14 @@ import cors from "cors";
 import load from "./loaders";
 import modules from "./modules";
 import errorHandler from "./middlewares/errorHandler";
+import requestLogging, { createLogger } from "@sebsv-github/logger";
 
 const app = new express();
+const logger = createLogger("App");
 
 app.use(json());
 app.use(cors());
+app.use(requestLogging);
 
 load();
 
@@ -25,5 +28,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}`);
+  logger.info(`App running on port ${PORT}`);
 });

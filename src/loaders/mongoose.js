@@ -1,13 +1,16 @@
 import mongoose from "mongoose";
 import config from "config";
+import { createLogger } from "@sebsv-github/logger";
 
 async function load() {
+  const logger = createLogger("Mongoose loader");
+
   let uri = `mongodb://${_generateCredentials()}${config.get(
     "db.host"
   )}:${config.get("db.port")}/${config.get("db.database")}`;
   try {
     await mongoose.connect(uri);
-    console.log("Database connected");
+    logger.info("Database connected");
   } catch (error) {
     throw Error(error);
   }
