@@ -5,5 +5,8 @@
     "database": "monolith",
     "username": "",
     "password": ""
+  },
+  "jwt": {
+    "expiration": "15m"
   }
 }

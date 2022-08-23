@@ -1,7 +1,13 @@
 import jwt from "jsonwebtoken";
+import config from "config";
 
 function sign(payload) {
-  return jwt.sign(payload, getSecret());
+  if (!config.has("jwt.expiration")) {
+    throw Error("JWT expiration time not set");
+  }
+  return jwt.sign(payload, getSecret(), {
+    expiresIn: config.get("jwt.expiration"),
+  });
 }
 
 function verify(token) {
