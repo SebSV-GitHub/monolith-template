@@ -1,13 +1,14 @@
 import AppError from "../../utils/AppError";
-import { createUser } from "./user.dao";
+import { createUser, findUserByUsername } from "./user.dao";
 import { hash } from "../../utils/password";
+import { userDAOToProfileDTO } from "./Profile.dto";
 
 async function postUser(user) {
-  const { username, password } = user;
+  const { password } = user;
   const hashedPassword = await hash(password);
   try {
     return await createUser({
-      username,
+      ...user,
       password: hashedPassword,
     });
   } catch (error) {
@@ -18,4 +19,9 @@ async function postUser(user) {
   }
 }
 
-export { postUser };
+async function getUser(username) {
+  const userDAO = await findUserByUsername(username);
+  return userDAOToProfileDTO(userDAO);
+}
+
+export { postUser, getUser };

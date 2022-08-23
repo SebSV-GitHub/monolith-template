@@ -65,6 +65,21 @@
           "username": "JohnDoe",
           "password": "s3cr3t"
         }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string" 
+          }
+        },
+        "example": {
+          "username": "JohnDoe",
+          "email": "john.doe@email.com"
+        }
       }
     },
     "responses": {
@@ -131,6 +146,30 @@
           },
           "409": {
             "description": "Username or email already exists"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get authenticated user profile",
+        "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"

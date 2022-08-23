@@ -5,4 +5,8 @@ function createUser(user) {
   return instance.save();
 }
 
-export { createUser };
+function findUserByUsername(username) {
+  return User.findOne({ username });
+}
+
+export { createUser, findUserByUsername };
