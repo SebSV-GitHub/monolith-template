@@ -1,11 +1,14 @@
 version: "3.9"
 services:
   api:
-    build: .
+    build:
+      context: .
+      args:
+        GITHUB_PACKAGES_NPM_TOKEN: "${GITHUB_PACKAGES_NPM_TOKEN}"
     ports:
       - "8080:8080"
     environment:
-      - NODE_ENV=production
+      NODE_ENV: production
     env_file:
       - ./.env
   mongodb:
