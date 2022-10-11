@@ -1,12 +1,12 @@
 {
-  "db": {
-    "host": "localhost",
-    "port": "27017",
-    "database": "monolith",
-    "username": "",
-    "password": ""
-  },
-  "jwt": {
-    "expiration": "15m"
-  }
+	"db": {
+		"host": "localhost",
+		"port": "27017",
+		"database": "monolith",
+		"username": "",
+		"password": ""
+	},
+	"jwt": {
+		"expiration": "15m"
+	}
 }

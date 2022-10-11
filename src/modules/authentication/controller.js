@@ -1,32 +1,33 @@
-import {
-  findToken,
-  getUserByUsername,
-  inactivateToken,
-  registerToken,
-} from "./authentication.dao";
 import { verify } from "../../utils/password";
 import { sign } from "../../utils/jwt";
-import AppError from "../../utils/AppError";
+import AppError from "../../utils/app-error";
+import {
+	findToken,
+	getUserByUsername,
+	inactivateToken,
+	registerToken,
+} from "./authentication-dao";
 
 async function authenticate(credentials) {
-  const { username, password } = credentials;
-  const user = await getUserByUsername(username);
-  if (!user) {
-    throw AppError(403, "Invalid Credential");
-  }
-  if (!(await verify(user.password, password))) {
-    throw AppError(403, "Invalid Credentials");
-  }
+	const { username, password } = credentials;
+	const user = await getUserByUsername(username);
+	if (!user) {
+		throw new AppError(403, "Invalid Credential");
+	}
 
-  const token = sign({ username: user.username });
-  await registerToken(token);
+	if (!(await verify(user.password, password))) {
+		throw new AppError(403, "Invalid Credentials");
+	}
 
-  return token;
+	const token = sign({ username: user.username });
+	await registerToken(token);
+
+	return token;
 }
 
 async function logout(token) {
-  const tokenInstance = await findToken(token);
-  return inactivateToken(tokenInstance);
+	const tokenInstance = await findToken(token);
+	return inactivateToken(tokenInstance);
 }
 
 export { authenticate, logout };

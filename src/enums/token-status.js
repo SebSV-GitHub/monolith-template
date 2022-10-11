@@ -1,6 +1,6 @@
 const TokenStatus = {
-  ACTIVE: "active",
-  INACTIVE: "inactive",
+	ACTIVE: "active",
+	INACTIVE: "inactive",
 };
 
 export default TokenStatus;

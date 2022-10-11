@@ -1,28 +1,28 @@
 import { Router } from "express";
-import validateAuth from "../../middlewares/validateAuth";
+import validateAuth from "../../middlewares/validate-auth";
 import { getToken } from "../../utils/auth";
-import requestMiddleware from "../../utils/requestMiddleware";
+import requestMiddleware from "../../utils/request-middleware";
 import * as controller from "./controller";
 
-const router = Router();
+const router = new Router();
 
 router.post(
-  "/authentications",
-  requestMiddleware(async (req, res) => {
-    const credentials = req.body;
-    const token = await controller.authenticate(credentials);
-    res.json({ token });
-  })
+	"/authentications",
+	requestMiddleware(async (request, response) => {
+		const credentials = request.body;
+		const token = await controller.authenticate(credentials);
+		response.json({ token });
+	})
 );
 
 router.delete(
-  "/authentications",
-  validateAuth,
-  requestMiddleware(async (req, res) => {
-    const { token } = getToken(req);
-    await controller.logout(token);
-    res.sendStatus(200);
-  })
+	"/authentications",
+	validateAuth,
+	requestMiddleware(async (request, response) => {
+		const { token } = getToken(request);
+		await controller.logout(token);
+		response.sendStatus(200);
+	})
 );
 
 export default router;

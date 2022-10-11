@@ -1,11 +1,12 @@
+import process from "node:process";
 import express, { json } from "express";
 import cors from "cors";
+import requestLogging, { createLogger } from "@sebsv-github/logger";
 import load from "./loaders";
 import modules from "./modules";
-import errorHandler from "./middlewares/errorHandler";
-import requestLogging, { createLogger } from "@sebsv-github/logger";
+import errorHandler from "./middlewares/error-handler";
 
-const app = new express();
+const app = express();
 const logger = createLogger({ label: "App" });
 
 logger.debug("Using JSON");
@@ -19,11 +20,11 @@ logger.debug("Running loaders");
 load();
 
 logger.debug("Registering health check endpoint");
-app.get("/api/health-check", (_req, res) => {
-  res.json({
-    status: "ok",
-    uptime: process.uptime(),
-  });
+app.get("/api/health-check", (_request, response) => {
+	response.json({
+		status: "ok",
+		uptime: process.uptime(),
+	});
 });
 
 logger.debug("Registering modules");
@@ -35,5 +36,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
-  logger.info(`App running on port ${PORT}`);
+	logger.info(`App running on port ${PORT}`);
 });

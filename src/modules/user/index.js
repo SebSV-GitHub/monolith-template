@@ -1,27 +1,27 @@
 import { Router } from "express";
-import validateAuth from "../../middlewares/validateAuth";
-import requestMiddleware from "../../utils/requestMiddleware";
+import validateAuth from "../../middlewares/validate-auth";
+import requestMiddleware from "../../utils/request-middleware";
 import * as controller from "./controller";
 
-const router = Router();
+const router = new Router();
 
 router.post(
-  "/users",
-  requestMiddleware(async (req, res) => {
-    const user = req.body;
-    await controller.postUser(user);
-    res.sendStatus(201);
-  })
+	"/users",
+	requestMiddleware(async (request, response) => {
+		const user = request.body;
+		await controller.postUser(user);
+		response.sendStatus(201);
+	})
 );
 
 router.get(
-  "/users",
-  validateAuth,
-  requestMiddleware(async (req, res) => {
-    const { username } = req.user;
-    const user = await controller.getUser(username);
-    res.json(user);
-  })
+	"/users",
+	validateAuth,
+	requestMiddleware(async (request, response) => {
+		const { username } = request.user;
+		const user = await controller.getUser(username);
+		response.json(user);
+	})
 );
 
 export default router;
