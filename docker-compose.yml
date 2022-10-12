@@ -3,13 +3,17 @@ services:
   api:
     build:
       context: .
+      dockerfile: Dockerfile.dev
       args:
         GITHUB_PACKAGES_NPM_TOKEN: "${GITHUB_PACKAGES_NPM_TOKEN}"
     ports:
       - "8080:8080"
     environment:
       NODE_ENV: production
+      PORT: 8080
     env_file:
       - ./.env
+    volumes:
+      - ./src:/app/src
   mongodb:
     image: mongo

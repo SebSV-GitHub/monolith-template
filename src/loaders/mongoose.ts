@@ -3,7 +3,9 @@ import config from "config";
 import { createLogger } from "@sebsv-github/logger";
 
 async function load() {
-	const logger = createLogger({ label: "Mongoose" });
+	const logger = createLogger({ label: "Mongoose loader" });
+
+	logger.debug("Loading mongoose");
 
 	const uri = `mongodb://${_generateCredentials()}${config.get<string>(
 		"db.host"

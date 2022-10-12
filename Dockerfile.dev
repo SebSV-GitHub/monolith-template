@@ -8,9 +8,11 @@ COPY .npmrc .
 ARG GITHUB_PACKAGES_NPM_TOKEN
 ENV GITHUB_PACKAGES_NPM_TOKEN=${GITHUB_PACKAGES_NPM_TOKEN}
 
-RUN npm i --omit=dev
+RUN npm i
 
 COPY ./config ./config
 COPY ./src ./src
+COPY ./types ./types
+COPY ./tsconfig.json ./tsconfig.json
 
-CMD [ "npm", "start" ]
+CMD npm run dev
