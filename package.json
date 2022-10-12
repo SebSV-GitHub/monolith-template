@@ -4,7 +4,8 @@
 	"description": "Monolith API template",
 	"main": "src/index.ts",
 	"scripts": {
-		"start": "node .",
+		"start": "node src/index.js",
+		"build": "tsc -b",
 		"debug": "nodemon --exec 'node --inspect -r dotenv/config -r ts-node/register src/index.ts' -e ts,json",
 		"debug-brk": "nodemon --exec 'node --inspect-brk -r dotenv/config -r ts-node/register src/index.ts' -e ts,json",
 		"dev": "nodemon -e ts,json --exec 'ts-node -r dotenv/config src/index.ts'",
