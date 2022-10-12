@@ -1,10 +1,13 @@
 import { Schema, model } from "mongoose";
 
-type User = {
+type Credentials = {
 	username: string;
-	email: string;
 	password: string;
 };
+
+type User = {
+	email: string;
+} & Credentials;
 
 const userSchema = new Schema<User>({
 	username: {
@@ -21,4 +24,4 @@ const userSchema = new Schema<User>({
 const user = model<User>("User", userSchema);
 
 export default user;
-export type { User };
+export type { User, Credentials };

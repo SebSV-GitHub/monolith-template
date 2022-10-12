@@ -1,6 +1,6 @@
 import process from "node:process";
 import express from "express";
-import requestLogging, { createLogger } from "@sebsv-github/logger";
+import { createLogger } from "@sebsv-github/logger";
 import load from "./loaders";
 import modules from "./modules";
 import errorHandler from "./middlewares/error-handler";

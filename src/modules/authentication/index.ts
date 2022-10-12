@@ -3,14 +3,10 @@ import type { Request, Response } from "express-serve-static-core";
 import validateAuth from "../../middlewares/validate-auth";
 import { getToken } from "../../utils/auth";
 import requestMiddleware from "../../utils/request-middleware";
+import type { Credentials } from "../../models/user";
 import * as controller from "./controller";
 
 const routes = router();
-
-type Credentials = {
-	username: string;
-	password: string;
-};
 
 routes.post(
 	"/authentications",
