@@ -1,28 +1,34 @@
-import { Router } from "express";
+import { Router as router } from "express";
+import type { Request, Response } from "express-serve-static-core";
 import validateAuth from "../../middlewares/validate-auth";
 import { getToken } from "../../utils/auth";
 import requestMiddleware from "../../utils/request-middleware";
 import * as controller from "./controller";
 
-const router = new Router();
+const routes = router();
 
-router.post(
+type Credentials = {
+	username: string;
+	password: string;
+};
+
+routes.post(
 	"/authentications",
-	requestMiddleware(async (request, response) => {
-		const credentials = request.body;
+	requestMiddleware(async (request: Request, response: Response) => {
+		const credentials = request.body as Credentials;
 		const token = await controller.authenticate(credentials);
 		response.json({ token });
 	})
 );
 
-router.delete(
+routes.delete(
 	"/authentications",
 	validateAuth,
-	requestMiddleware(async (request, response) => {
+	requestMiddleware(async (request: Request, response: Response) => {
 		const { token } = getToken(request);
 		await controller.logout(token);
 		response.sendStatus(200);
 	})
 );
 
-export default router;
+export default routes;

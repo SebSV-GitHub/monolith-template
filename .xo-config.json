@@ -1,12 +1,18 @@
 {
 	"prettier": true,
 	"rules": {
-		"import/extensions": ["warn", "never"],
+		"import/extensions": [
+			"error",
+			"always",
+			{
+				"ts": "never"
+			}
+		],
 		"n/file-extension-in-import": [
 			"error",
 			"always",
 			{
-				".js": "never"
+				".ts": "never"
 			}
 		]
 	}

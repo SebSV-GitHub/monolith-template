@@ -3,9 +3,9 @@ import loadMongoose from "./mongoose";
 
 const logger = createLogger({ label: "Loader" });
 
-function loadAll() {
+async function loadAll() {
 	logger.debug("Loading Mongoose");
-	loadMongoose();
+	await loadMongoose();
 }
 
 export default loadAll;

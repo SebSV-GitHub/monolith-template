@@ -8,7 +8,10 @@ import {
 	registerToken,
 } from "./authentication-dao";
 
-async function authenticate(credentials) {
+async function authenticate(credentials: {
+	username: string;
+	password: string;
+}) {
 	const { username, password } = credentials;
 	const user = await getUserByUsername(username);
 	if (!user) {
@@ -25,9 +28,13 @@ async function authenticate(credentials) {
 	return token;
 }
 
-async function logout(token) {
+async function logout(token: string) {
 	const tokenInstance = await findToken(token);
-	return inactivateToken(tokenInstance);
+	if (tokenInstance) {
+		return inactivateToken(tokenInstance);
+	}
+
+	throw new AppError(500, "Token not found");
 }
 
 export { authenticate, logout };

@@ -5,18 +5,20 @@ import { createLogger } from "@sebsv-github/logger";
 async function load() {
 	const logger = createLogger({ label: "Mongoose" });
 
-	const uri = `mongodb://${_generateCredentials()}${config.get(
+	const uri = `mongodb://${_generateCredentials()}${config.get<string>(
 		"db.host"
-	)}:${config.get("db.port")}/${config.get("db.database")}`;
+	)}:${config.get<string | number>("db.port")}/${config.get<string>(
+		"db.database"
+	)}`;
 	try {
 		await mongoose.connect(uri);
 		logger.info("Database connected");
-	} catch (error) {
-		throw new Error(error);
+	} catch (error: unknown) {
+		throw error;
 	}
 }
 
-function _generateCredentials() {
+function _generateCredentials(): string {
 	if (config.has("db.username") && config.has("db.password")) {
 		const username = config.get("db.username");
 		const password = config.get("db.password");
@@ -24,8 +26,12 @@ function _generateCredentials() {
 			return "";
 		}
 
-		return `${config.get("db.username")}:${config.get("db.password")}@`;
+		return `${config.get<string>("db.username")}:${config.get<string>(
+			"db.password"
+		)}@`;
 	}
+
+	return "";
 }
 
 export default load;

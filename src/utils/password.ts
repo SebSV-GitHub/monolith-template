@@ -1,10 +1,10 @@
 import argon2 from "argon2";
 
-function hash(password) {
+async function hash(password: string) {
 	return argon2.hash(password);
 }
 
-function verify(hashedPassword, password) {
+async function verify(hashedPassword: string, password: string) {
 	return argon2.verify(hashedPassword, password);
 }
 

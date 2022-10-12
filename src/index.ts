@@ -17,7 +17,9 @@ logger.debug("Using request logging");
 app.use(requestLogging);
 
 logger.debug("Running loaders");
-load();
+load()
+	.then(() => null)
+	.catch(() => null);
 
 logger.debug("Registering health check endpoint");
 app.get("/api/health-check", (_request, response) => {
@@ -33,8 +35,8 @@ app.use(modules);
 logger.debug("Using error handler");
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 8080;
+const port = process.env.PORT ?? 8080;
 
-app.listen(PORT, () => {
-	logger.info(`App running on port ${PORT}`);
+app.listen(port, () => {
+	logger.info(`App running on port ${port}`);
 });
