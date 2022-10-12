@@ -1,4 +1,4 @@
-import { MongoServerError } from "mongodb";
+import type { MongoServerError } from "mongodb";
 import AppError from "../../utils/app-error";
 import { hash } from "../../utils/password";
 import type { User } from "../../models/user";
@@ -15,7 +15,11 @@ async function postUser(user: User) {
 		});
 	} catch (error: unknown) {
 		console.log(typeof error);
-		if (error instanceof MongoServerError && error.code === 11_000) {
+		if (
+			error instanceof Error &&
+			error.name === "MongoServerError" &&
+			(error as MongoServerError).code === 11_000
+		) {
 			throw new AppError(409, "Username or email already exists");
 		}
 
