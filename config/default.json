@@ -7,6 +7,7 @@
 		"password": ""
 	},
 	"jwt": {
-		"expiration": "15m"
+		"expiration": "15m",
+		"secret": "secret"
 	}
 }

@@ -13,7 +13,6 @@ function requestMiddleware(
 				next();
 			})
 			.catch(next);
-		next();
 	};
 }
 

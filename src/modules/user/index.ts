@@ -14,7 +14,6 @@ routes.post(
 		response.sendStatus(201);
 	})
 );
-
 routes.get(
 	"/users",
 	validateAuth,

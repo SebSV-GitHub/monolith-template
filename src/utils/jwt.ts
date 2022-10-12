@@ -1,4 +1,3 @@
-import process from "node:process";
 import jwt from "jsonwebtoken";
 import config from "config";
 
@@ -17,10 +16,11 @@ function verify(token: string) {
 }
 
 function getSecret() {
-	const secret = process.env.JWT_SECRET;
-	if (!secret) {
+	if (!config.has("jwt.secret")) {
 		throw new Error("JWT Secret not defined into environment variables");
 	}
+
+	const secret = config.get<string>("jwt.secret");
 
 	return secret;
 }
