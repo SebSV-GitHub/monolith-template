@@ -5,7 +5,7 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"start": "node src/index.js",
-		"build": "tsc -b",
+		"build": "tsc",
 		"debug": "nodemon --exec 'node --inspect -r dotenv/config -r ts-node/register src/index.ts' -e ts,json",
 		"debug-brk": "nodemon --exec 'node --inspect-brk -r dotenv/config -r ts-node/register src/index.ts' -e ts,json",
 		"dev": "nodemon -e ts,json --exec 'ts-node -r dotenv/config src/index.ts'",
@@ -36,10 +36,10 @@
 		"config": "^3.3.7",
 		"cors": "^2.8.5",
 		"express": "^4.18.1",
-		"joi": "^17.6.3",
 		"jsonwebtoken": "^8.5.1",
 		"mongodb": "^4.10.0",
-		"mongoose": "^6.5.0"
+		"mongoose": "^6.5.0",
+		"zod": "^3.20.6"
 	},
 	"devDependencies": {
 		"@types/config": "^3.3.0",

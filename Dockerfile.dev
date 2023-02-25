@@ -15,4 +15,4 @@ COPY ./src ./src
 COPY ./types ./types
 COPY ./tsconfig.json ./tsconfig.json
 
-CMD npm run dev
+CMD ["npm", "run", "dev"]

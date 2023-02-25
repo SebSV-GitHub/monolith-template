@@ -3,7 +3,7 @@
 		"host": "cluster0.b3perwn.mongodb.net",
 		"port": "27017",
 		"database": "monolith",
-		"username": "monolith",
+		"username": "service",
 		"password": ""
 	}
 }

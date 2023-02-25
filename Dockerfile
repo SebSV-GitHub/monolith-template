@@ -2,32 +2,30 @@ FROM node:alpine as builder
 
 WORKDIR /app
 
-COPY package*.json .
-COPY .npmrc .
+COPY package.json package.json
+COPY src src
+COPY tsconfig.json tsconfig.json
+COPY .npmrc .npmrc
+COPY types types
 
 ARG GITHUB_PACKAGES_NPM_TOKEN
 ENV GITHUB_PACKAGES_NPM_TOKEN=${GITHUB_PACKAGES_NPM_TOKEN}
 
-RUN npm i -g typescript
-RUN npm i
-
-COPY src src
-COPY types types
-COPY tsconfig.json .
-
-RUN tsc -b
-
-RUN rm -rf node_modules
-
-RUN npm i --omit=dev
+RUN npm i && npm run build
 
 FROM node:alpine
 
 WORKDIR /app
 
-COPY config/default.json config/default.json
-COPY config/production.json config/production.json
-COPY --from=builder /app/dist/ src/
-COPY --from=builder /app/node_modules/ node_modules/
+ARG GITHUB_PACKAGES_NPM_TOKEN
+ENV GITHUB_PACKAGES_NPM_TOKEN=${GITHUB_PACKAGES_NPM_TOKEN}
 
-CMD node src/index.js
+COPY .npmrc .npmrc
+COPY config config
+
+COPY --from=builder /app/dist /app
+
+COPY package.json package.json
+RUN npm i --omit=dev && rm package.json
+
+CMD ["node", "."]
