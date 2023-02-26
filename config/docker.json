@@ -1,0 +1,7 @@
+{
+	"db": {
+		"host": "mongodb+srv://cluster0.b3perwn.mongodb.net",
+		"database": "monolith",
+		"username": "service"
+	}
+}

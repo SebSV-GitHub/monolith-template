@@ -1,9 +1,8 @@
 {
 	"db": {
-		"host": "mongodb+srv://cluster0.b3perwn.mongodb.net",
-		"port": "27017",
+		"host": "mongodb://localhost:27017",
 		"database": "monolith",
-		"username": "service",
+		"username": "",
 		"password": ""
 	},
 	"jwt": {

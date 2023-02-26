@@ -10,9 +10,12 @@ services:
       - "8080:8080"
     environment:
       PORT: 8080
+      NODE_ENV: docker_compose
     env_file:
       - ./.env
     volumes:
       - ./src:/app/src
-  mongodb:
+  mongo:
     image: mongo
+    ports:
+      - "27017:27017"
