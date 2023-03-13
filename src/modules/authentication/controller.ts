@@ -1,6 +1,7 @@
 import { verify } from "../../utils/password";
 import { sign } from "../../utils/jwt";
 import AppError from "../../utils/app-error";
+import cleanString from "../../utils/string";
 import {
 	findToken,
 	getUserByUsername,
@@ -13,7 +14,7 @@ async function authenticate(credentials: {
 	password: string;
 }) {
 	const { username, password } = credentials;
-	const user = await getUserByUsername(username);
+	const user = await getUserByUsername(cleanString(username));
 	if (!user) {
 		throw new AppError(403, "Invalid Credential");
 	}

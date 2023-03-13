@@ -14,7 +14,10 @@
 				}
 			}
 		},
-		{ "url": "https://www.sebsv.com/api", "description": "Production" }
+		{
+			"url": "https://www.sebsv.com/api",
+			"description": "Production"
+		}
 	],
 	"tags": [
 		{
@@ -99,7 +102,9 @@
 		"/health-check": {
 			"get": {
 				"summary": "API health check",
-				"tags": ["Health Check"],
+				"tags": [
+					"Health Check"
+				],
 				"responses": {
 					"200": {
 						"description": "API healthy",
@@ -129,7 +134,9 @@
 		"/users": {
 			"post": {
 				"summary": "Create a new user",
-				"tags": ["User"],
+				"tags": [
+					"User"
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -154,7 +161,9 @@
 			},
 			"get": {
 				"summary": "Get authenticated user profile",
-				"tags": ["User"],
+				"tags": [
+					"User"
+				],
 				"security": [
 					{
 						"bearerAuth": []
@@ -180,7 +189,9 @@
 		"/authentications": {
 			"post": {
 				"summary": "User authentication",
-				"tags": ["Auth"],
+				"tags": [
+					"Auth"
+				],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -219,8 +230,10 @@
 				}
 			},
 			"delete": {
-				"summary": "User deauthentication",
-				"tags": ["Auth"],
+				"summary": "User authentication invalidation",
+				"tags": [
+					"Auth"
+				],
 				"security": [
 					{
 						"bearerAuth": []
